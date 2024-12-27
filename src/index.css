@@ -1,0 +1,27 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Alata&display=swap'); */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Jost";
+  src: url("/assets/fonts/Jost.ttf");
+}
+
+@font-face {
+  font-family: "Alata";
+  src: url("/assets/fonts/Alata.ttf");
+}
+
+@font-face {
+  font-family: "Raleway";
+  src: url("/assets/fonts/Raleway.ttf");
+}
+
+* {
+  @apply font-alata;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
