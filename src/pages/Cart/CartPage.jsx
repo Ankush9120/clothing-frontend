@@ -92,6 +92,7 @@ const CartPage = () => {
         <div className="flex items-center text-sm">
           <div className="h-[1px] grow w-max bg-primary-100 relative">
             <RadioIcon className="absolute -right-1.5 -top-1.5 text-primary-100" />
+            
           </div>
           <span className="text-primary-100 font-medium mx-2">Bag</span>
 
