@@ -2,13 +2,13 @@ import React from "react";
 import { HeartIcon } from "../libs/icons";
 import { toggleLikeProduct } from "../store/slices/likedProductsSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { motion } from "framer-motion";
+
 
 const LikeIcon = ({ product, className }) => {
-  // console.log(product);
-  
   const dispatch = useDispatch();
-  const likedProducts = useSelector(state => state.likedProducts);
-  const isLiked = likedProducts.some(item => item?.id == product?.id);
+  const likedProducts = useSelector((state) => state.likedProducts);
+  const isLiked = likedProducts.some((item) => item?.id == product?.id);
 
   const handleLike = (e) => {
     e.preventDefault();
@@ -16,9 +16,11 @@ const LikeIcon = ({ product, className }) => {
   };
 
   return (
-    <div className={`bg-white bg-opacity-[26%] size-6 grid place-items-center rounded-full cursor-pointer ${className}`} onClick={handleLike}>
-      <HeartIcon className={`text-[14px] stroke-white ${isLiked ? "*:fill-red-100 !stroke-red-100" : ""}`} />
-    </div>
+    <motion.div className={`bg-white bg-opacity-[26%] size-6 grid place-items-center rounded-full cursor-pointer ${className}`} onClick={handleLike} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+      <motion.div animate={isLiked ? { scale: [1, 1.2, 1] } : { scale: 1 }} transition={{ duration: 0.3, type: "spring", stiffness: 500 }}>
+        <HeartIcon className={`text-[14px] stroke-white ${isLiked ? "*:fill-red-100 !stroke-red-100" : ""}`} />
+      </motion.div>
+    </motion.div>
   );
 };
 

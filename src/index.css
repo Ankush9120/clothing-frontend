@@ -18,10 +18,23 @@
   src: url("/assets/fonts/Raleway.ttf");
 }
 
+@font-face {
+  font-family: "Albert Sans";
+  src: url("/assets/fonts/Albert.ttf");
+}
+
 * {
   @apply font-alata;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+hr{
+  @apply border-colorBorder-200;
+}
+
+.font-albert * {
+  font-family: "Albert Sans", sans-serif;
 }

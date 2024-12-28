@@ -10,20 +10,25 @@ export default {
     },
     fontFamily: {
       raleway: ["Raleway"],
-      alata: ["Alata"]
+      alata: ["Alata"],
+      albert: ["Albert Sans"]
     },
     extend: {
       colors: {
         primary: {
           100: "#754F23",
           200: "#C1AEA0",
+          300: "#C1AEA04D", // 30%
+          400: "#C1AEA066", // 40%
+          500: "#F0EADC",
+          600: "#C1AEA01A" // 10%
         },
         secondary: {
           100: "#2F2F2F",
         },
         colorBorder: {
           100: "#C4C4C4",
-          200: "#C1AEA066"
+          200: "#C1AEA066",
         },
         green: {
           100: "#369850",

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { MdArrowBack, MdFavoriteBorder, MdAdd, MdEdit, MdDelete, MdClose } from "react-icons/md";
+import Header from "../../components/Header";
+import { HeartIcon } from "../../libs/icons";
 
 // Mock data for saved addresses
 const initialAddresses = [
@@ -113,16 +115,16 @@ export default function AddressPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDF8F3]">
-      <div className="max-w-lg mx-auto pb-20">
-        {/* Header */}
-        <header className="flex items-center justify-between p-4 bg-white sticky top-0 z-10">
-          <div className="flex items-center gap-4">
-            <MdArrowBack className="w-5 h-5" />
-            <h1 className="text-base font-medium tracking-wide">SHOPPING BAG</h1>
-          </div>
-          <MdFavoriteBorder className="w-5 h-5" />
-        </header>
+    <div>
+        <Header
+          title="Address"
+          links={[
+            {
+              icon: HeartIcon,
+              to: "/liked-products",
+            },
+          ]}
+        />
 
         {/* Progress Bar */}
         <div className="px-6 py-4">
@@ -252,7 +254,6 @@ export default function AddressPage() {
             Continue to Payment
           </button>
         </div>
-      </div>
     </div>
   );
 }

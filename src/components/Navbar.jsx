@@ -12,7 +12,7 @@ const Navbar = () => {
       <div className="flex gap-2.5 items-center *:size-[30px]">
         <img src={Heart} alt="" />
         <img src={Bag} alt="" />
-        <img src={Avatar} alt="" />
+        {/* <img src={Avatar} alt="" /> */}
       </div>
     </div>
   );

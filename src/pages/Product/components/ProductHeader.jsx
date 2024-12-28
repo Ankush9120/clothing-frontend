@@ -31,7 +31,7 @@ const ProductHeader = ({ productId }) => {
   };
 
   return (
-    <div className="flex justify-between py-2.5 items-center px-4">
+    <div className="flex justify-between py-2.5 items-center px-4 sticky top-0 bg-primary-500 z-10">
       <BackButton />
       <div className="flex gap-2.5 items-center">
         <button onClick={handleShare}>

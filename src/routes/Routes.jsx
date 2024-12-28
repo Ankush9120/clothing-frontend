@@ -1,5 +1,6 @@
-import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { createBrowserRouter, RouterProvider, useLocation, useNavigationType, useOutlet } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import Layout from "../components/Layout";
 import HomePage from "../pages/Home/HomePage";
 import ProductPage from "../pages/Product/ProductPage";
@@ -9,6 +10,63 @@ import OrderStatusPage from "../pages/OrderStatus/OrderStatusPage";
 import AddressPage from "../pages/Address/AddressPage";
 import LikedProductsPage from "../pages/LikedProducts/LikedProductsPage";
 
+const pageVariants = {
+  initial: (direction) => ({
+    x: direction > 0 ? "50%" : "-50%",
+    opacity: 0,
+  }),
+  in: {
+    x: 0,
+    opacity: 1,
+  },
+  out: (direction) => ({
+    x: direction > 0 ? "-50%" : "50%",
+    opacity: 0,
+  }),
+};
+
+const pageTransition = {
+  in: {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.3, // Faster entry
+  },
+  out: {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.3, // Slower exit
+  },
+};
+
+const AnimatedOutlet = () => {
+  const o = useOutlet();
+  const [outlet] = React.useState(o);
+
+  return <>{outlet}</>;
+};
+
+const AnimatedRoutes = () => {
+  const location = useLocation();
+  const navigationType = useNavigationType();
+  const [direction, setDirection] = useState(0);
+
+  useEffect(() => {
+    if (navigationType === "POP") {
+      setDirection(-1);
+    } else {
+      setDirection(1);
+    }
+  }, [navigationType, location.pathname]);
+
+  return (
+    <AnimatePresence initial={false} mode="wait" custom={direction}>
+      <motion.div key={location.pathname} custom={direction} initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition}>
+        <AnimatedOutlet />
+      </motion.div>
+    </AnimatePresence>
+  );
+};
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,31 +74,37 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage />,
-      },
-      {
-        path: "/product/:productId",
-        element: <ProductPage />,
-      },
-      {
-        path: "/cart",
-        element: <CartPage />,
-      },
-      {
-        path: "/orders",
-        element: <OrdersPage />,
-      },
-      {
-        path: "/order-status",
-        element: <OrderStatusPage />,
-      },
-      {
-        path: "/address",
-        element: <AddressPage />,
-      },
-      {
-        path: "/liked-products",
-        element: <LikedProductsPage />,
+        element: <AnimatedRoutes />,
+        children: [
+          {
+            path: "/",
+            element: <HomePage />,
+          },
+          {
+            path: "/product/:productId",
+            element: <ProductPage />,
+          },
+          {
+            path: "/cart",
+            element: <CartPage />,
+          },
+          {
+            path: "/orders",
+            element: <OrdersPage />,
+          },
+          {
+            path: "/order-status",
+            element: <OrderStatusPage />,
+          },
+          {
+            path: "/address",
+            element: <AddressPage />,
+          },
+          {
+            path: "/liked-products",
+            element: <LikedProductsPage />,
+          },
+        ],
       },
     ],
   },
