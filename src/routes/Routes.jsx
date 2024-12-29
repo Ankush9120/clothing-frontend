@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createBrowserRouter, RouterProvider, useLocation, useNavigationType, useOutlet } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Layout from "../components/Layout";
@@ -11,29 +11,23 @@ import AddressPage from "../pages/Address/AddressPage";
 import LikedProductsPage from "../pages/LikedProducts/LikedProductsPage";
 
 const pageVariants = {
-  initial: (direction) => ({
-    opacity: 0,
-  }),
-  in: {
+  initial: {
     x: 0,
+    opacity: 0,
+  },
+  in: {
     opacity: 1,
+    transition: {
+      type: "tween", ease: "easeInOut", duration: 0.2
+    }
   },
   out: (direction) => ({
-    x: direction > 0 ? "-100%" : "100%",
-    opacity: 1,
+    x: direction > 0 ? "-50%" : "50%",
+    opacity: 0,
+    transition: {
+      type: "tween", ease: "easeInOut", duration: 0.15
+    }
   }),
-};
-
-const pageTransitionPosition = {
-  type: "tween",
-  ease: "easeInOut",
-  duration: 0.15,
-};
-
-const pageTransitionOpacity = {
-  type: "tween",
-  ease: "easeInOut",
-  duration: 0.4,
 };
 
 const AnimatedOutlet = () => {
@@ -48,6 +42,10 @@ const AnimatedRoutes = () => {
   const navigationType = useNavigationType();
   const direction = navigationType === "POP" ? -1 : 1;
 
+  useEffect(() => {
+    history.scrollRestoration = 'manual';
+  }, [])
+
   return (
     <AnimatePresence initial={false} mode="wait" custom={direction}>
       <motion.div
@@ -57,9 +55,10 @@ const AnimatedRoutes = () => {
         animate="in"
         exit="out"
         variants={pageVariants}
-        transition={{
-          x: pageTransitionPosition,
-          opacity: pageTransitionOpacity,
+        onAnimationStart={(animationType) => {
+          if(animationType === "in") {
+            window.scroll(0, 0);
+          }
         }}
         className="grow flex flex-col"
       >
