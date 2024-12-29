@@ -35,7 +35,7 @@ const CustomerPhotos = ({ images }) => {
 
   return (
     <>
-      <h3 className="mb-3 text-lg font-semibold">Customer Photos & Videos</h3>
+      <h3 className="mb-3">Customer Photos & Videos</h3>
       <div className="relative">
         <div ref={containerRef} className="flex justify-between gap-2 mb-4 overflow-x-auto">
           {visibleImages.map((img, index) => (

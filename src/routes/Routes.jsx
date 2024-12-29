@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { createBrowserRouter, RouterProvider, useLocation, useNavigationType, useOutlet } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Layout from "../components/Layout";
@@ -41,15 +41,7 @@ const AnimatedOutlet = () => {
 const AnimatedRoutes = () => {
   const location = useLocation();
   const navigationType = useNavigationType();
-  const [direction, setDirection] = useState(0);
-
-  useEffect(() => {
-    if (navigationType === "POP") {
-      setDirection(-1);
-    } else {
-      setDirection(1);
-    }
-  }, [navigationType, location.pathname]);
+  const direction = navigationType === "POP" ? -1 : 1
 
   return (
     <AnimatePresence initial={false} mode="wait" custom={direction}>
