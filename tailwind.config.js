@@ -21,10 +21,13 @@ export default {
           300: "#C1AEA04D", // 30%
           400: "#C1AEA066", // 40%
           500: "#F0EADC",
-          600: "#C1AEA01A" // 10%
+          600: "#C1AEA01A", // 10%
+          700: "#C1AEA0B2" // 70%
         },
         secondary: {
           100: "#2F2F2F",
+          200: "#2F2F2FC4", // 70%,
+          300: "#2F2F2F4D", // 50%
         },
         colorBorder: {
           100: "#C4C4C4",
@@ -37,6 +40,9 @@ export default {
         },
         red: {
           100: "#D13131"
+        },
+        yellow: {
+          100: "#FFB200"
         }
       },
     },

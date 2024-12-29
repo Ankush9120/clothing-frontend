@@ -25,13 +25,13 @@ import { data1, data2 } from "../../libs/data";
 const HomePage = () => {
   const OutlineButton = ({ children }) => {
     return (
-      <button className="w-[118px] h-[32px] flex justify-center items-center text-[#754F23] border-[1px] border-solid border-[#754F23] gap-[15px] rounded-[7.3px] mx-auto text-[14px]">
+      <button className="w-[118px] h-[32px] flex justify-center items-center text-primary-100 border-[1px] border-solid border-primary-100 gap-[15px] rounded-[7.3px] mx-auto text-[14px]">
         {children} <img src={ArrowColored} className="h-[7px]" />
       </button>
     );
   };
   return (
-    <div className="text-[#2F2F2F]">
+    <div className="text-secondary-100 pb-10">
       <Navbar />
 
       <SearchBar />
@@ -39,11 +39,11 @@ const HomePage = () => {
       <div className="px-3 mt-[17px]">
         <div className="relative overflow-hidden">
           <div className="absolute h-full max-w-[216px] flex flex-col justify-center items-center text-center ml-[13px]">
-            <p className="text-[#2F2F2F] text-[14px] max-[400px]:text-[12px]">WEEKEND ONLY</p>
-            <p className="font-[900] text-[#754F23] text-[26px] leading-[39px] max-[400px]:text-[22px]">WINTER SALE</p>
-            <p className="text-[#2F2F2F] font-semibold leading-[24px] mt-1 max-[400px]:text-[14px] max-[400px]:leading-[18px]">UP TO 50%</p>
-            <p className="text-[#2F2F2F] text-[18px] leading-[18px] mt-2.5 max-[400px]:text-[14px] max-[400px]:leading-[18px]">Torem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <button className="w-[118px] h-[32px] flex justify-center items-center bg-[#754F23] text-white gap-[15px] rounded-[7.3px] mt-3 text-[14px] max-[400px]:scale-75">
+            <p className="text-secondary-100 text-[14px] max-[400px]:text-[12px]">WEEKEND ONLY</p>
+            <p className="font-[900] text-primary-100 text-[26px] leading-[39px] max-[400px]:text-[22px]">WINTER SALE</p>
+            <p className="text-secondary-100 font-semibold leading-[24px] mt-1 max-[400px]:text-[14px] max-[400px]:leading-[18px]">UP TO 50%</p>
+            <p className="text-secondary-100 text-[18px] leading-[18px] mt-2.5 max-[400px]:text-[14px] max-[400px]:leading-[18px]">Torem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <button className="w-[118px] h-[32px] flex justify-center items-center bg-primary-100 text-white gap-[15px] rounded-[7.3px] mt-3 text-[14px] max-[400px]:scale-75">
               Explore <img src={Arrow} className="h-[7px]" />
             </button>
           </div>
@@ -51,7 +51,7 @@ const HomePage = () => {
         </div>
         <div className="flex gap-[5px] justify-center *:min-h-2 *:min-w-2 *:rounded-full *:bg-[#C1AEA04D] mt-3">
           <div></div>
-          <div className="!bg-[#754F23]"></div>
+          <div className="!bg-primary-100"></div>
           <div></div>
           <div></div>
         </div>
@@ -81,7 +81,7 @@ const HomePage = () => {
       </div>
 
       <div className="text-[14px] py-[32px] px-[18px]">
-        <p className=" relative before:[''] before:h-[1px] before:w-[70%] before:absolute before:bg-[#2F2F2F] before:bottom-0">
+        <p className=" relative before:[''] before:h-[1px] before:w-[70%] before:absolute before:bg-secondary-100 before:bottom-0">
           <span className="text-[32px] leading-[44px]">Summer</span>
           <span className="text-[18px] leading-[18px] ml-2">Collections</span>
         </p>
@@ -95,7 +95,7 @@ const HomePage = () => {
       </div>
 
       <div className="text-[14px] py-[32px] px-[18px]">
-        <div className="flex justify-end relative before:[''] before:h-[1px] before:w-[70%] before:absolute before:bg-[#2F2F2F] before:bottom-0">
+        <div className="flex justify-end relative before:[''] before:h-[1px] before:w-[70%] before:absolute before:bg-secondary-100 before:bottom-0">
           <p>
             <span className="text-[32px] leading-[44px]">Winter</span>
             <span className="text-[18px] leading-[18px] ml-2">Collections</span>
@@ -114,7 +114,7 @@ const HomePage = () => {
       </div>
 
       <div className="text-[14px] py-[32px] px-[18px]">
-        <div className="flex justify-center relative before:[''] before:h-[1px] before:w-[90%] before:absolute before:bg-[#2F2F2F] before:bottom-0 pb-2">
+        <div className="flex justify-center relative before:[''] before:h-[1px] before:w-[90%] before:absolute before:bg-secondary-100 before:bottom-0 pb-2">
           <p>
             <span className="text-[18px] leading-[18px]">What our</span>
             <span className="text-[32px] leading-[44px] ml-2">Customer says</span>
@@ -132,7 +132,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-        <div className="mt-6 *:h-6 *:w-[26px] *:text-[#754F23] *:border-[1px] *:border-solid *:border-[#754F23] *:grid *:place-items-center *:rounded-[7px] flex justify-end gap-3">
+        <div className="mt-6 *:h-6 *:w-[26px] *:text-primary-100 *:border-[1px] *:border-solid *:border-primary-100 *:grid *:place-items-center *:rounded-[7px] flex justify-end gap-3">
           <button>
             <ArrowLeft />
           </button>
@@ -145,7 +145,7 @@ const HomePage = () => {
       <div className="text-[#6F6C90] flex flex-col justify-center items-center text-center gap-[40px]">
         <div className="flex items-center gap-3 mb-1.5">
           <img src={Brand} className="size-[32px]" alt="" />
-          <span className="text-[32px] text-[#754F23]">Luxeora</span>
+          <span className="text-[32px] text-primary-100">Luxeora</span>
         </div>
         <div className="grid gap-[14px]">
           <p className="text-[18px] text-[#170F49] ">Contact Us</p>
@@ -159,7 +159,7 @@ const HomePage = () => {
           <p>Brands</p>
           <p>About</p>
         </div>
-        <div className="text-[#754F23] flex items-center gap-[22px] *:size-[19px]">
+        <div className="text-primary-100 flex items-center gap-[22px] *:size-[19px]">
           <Facebook />
           <Twitter />
           <Instagram />

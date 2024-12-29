@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -10,23 +10,23 @@ import { BagColoredIcon, BagIcon, BrandLogo, DiscountIcon, StarIcon, ThumbsDownI
 import ProductCard from "../../components/ProductCard";
 import { addToCart } from "../../store/slices/cartSlice";
 import { similar_products } from "../../libs/data";
-import { ReactSVG } from "react-svg";
 import CustomerPhotos from "./components/CustomerPhotos";
 import SizeSelectionModal from "./components/SizeSelectionModal";
+import StickyButton from "../../components/StickyButton";
 
 const ProductPage = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
   const product = products.find((p) => p.id == productId);
-
+  const productAlreadyInCart = useSelector((state) => state.cart.items.find((item) => item.id === productId));
   const { image, title, description, price, discount } = product || {};
   const [selectedColor, setSelectedColor] = useState("Yellow");
+  const [addedToBagConfirmation, setAddedToBagConfirmation] = useState(false);
   const [selectedSize, setSelectedSize] = useState("");
   const [pincode, setPincode] = useState("");
   const [deliveryInfo, setDeliveryInfo] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [showSizeModal, setShowSizeModal] = useState(false);
   const [addedToBag, setAddedToBag] = useState(false);
 
   const sizes = [
@@ -36,6 +36,10 @@ const ProductPage = () => {
     { label: "L", count: 3 },
     { label: "XL", count: 1 },
   ];
+
+  useLayoutEffect(() => {
+    window.screenTop = 0;
+  },[])
 
   const handleCheckPincode = () => {
     setLoading(true);
@@ -70,27 +74,30 @@ const ProductPage = () => {
   };
 
   const handleAddToBag = () => {
-    if (!selectedSize) {
-      setShowSizeModal(true);
-      return;
-    }
     dispatch(
       addToCart({
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        image: product.image,
+        ...product,
         size: selectedSize,
       })
     );
     setAddedToBag(true);
   };
 
+  const handleAddToBagConfirmation = () => {
+    if(productAlreadyInCart) return;
+    setAddedToBagConfirmation(true)
+  }
+
   return (
     <div>
       <ProductHeader productId={productId} />
 
-      <Carousel images={[image, image, image, image]} />
+      <div className="relative">
+        <Carousel images={[image, image, image, image]} />
+        <div className="absolute bg-primary-500 rounded-[4px] flex items-center bottom-12 font-albert px-1 left-4 text-[14px] gap-1">
+          4 <StarIcon className="text-yellow-100" /> <div className="w-0.5 bg-secondary-100 h-4  opacity-50" /> 1.6K
+        </div>
+      </div>
 
       <div className="p-[18px]">
         <div className="flex justify-between items-center gap-2.5">
@@ -312,15 +319,11 @@ const ProductPage = () => {
         </div>
       </div>
 
-      {/* Sticky Add to Bag Button */}
-      <motion.div initial={{ y: 100 }} animate={{ y: 0 }} className="sticky bottom-0 left-0 right-0 p-[18px] bg-primary-500">
-        <button className="w-full py-[10px] rounded-[8px] bg-primary-100 text-primary-500 flex justify-center items-center gap-3" onClick={handleAddToBag}>
-          <Icon icon={BagColoredIcon} className="text-[18px]" />
-          {addedToBag ? "Added to Bag" : `Add to Bag ₹${price}`}
-        </button>
-      </motion.div>
+      <StickyButton onClick={handleAddToBagConfirmation} icon={BagColoredIcon}>
+        {addedToBag ? "Added to Bag" : `Add to Bag ₹${price}`}
+      </StickyButton>
 
-      <SizeSelectionModal open={showSizeModal} onClose={() => setShowSizeModal(false)} sizes={sizes} product={product} onConfirm={addToCart} setSelectedSize={setSelectedSize} />
+      <SizeSelectionModal open={addedToBagConfirmation} onClose={() => setAddedToBagConfirmation(false)} sizes={sizes} product={product} onConfirm={handleAddToBag} selectedSize={selectedSize} setSelectedSize={setSelectedSize} />
     </div>
   );
 };

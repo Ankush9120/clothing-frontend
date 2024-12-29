@@ -1,9 +1,14 @@
+'use client'
+
 import React, { useState } from "react";
-import { MdArrowBack, MdFavoriteBorder, MdAdd, MdEdit, MdDelete, MdClose } from "react-icons/md";
+import { motion, AnimatePresence } from "framer-motion";
+import { MdAdd, MdEdit, MdDelete, MdClose } from "react-icons/md";
 import Header from "../../components/Header";
 import { HeartIcon } from "../../libs/icons";
+import StatusBar from "../../components/StatusBar";
+import { STATUS_STEPS } from "../../libs/constants";
+import StickyButton from "../../components/StickyButton";
 
-// Mock data for saved addresses
 const initialAddresses = [
   {
     id: 1,
@@ -51,7 +56,6 @@ export default function AddressPage() {
       ...prev,
       [name]: value,
     }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors((prev) => ({
         ...prev,
@@ -78,7 +82,13 @@ export default function AddressPage() {
     if (!validateForm()) return;
 
     if (editingAddress) {
-      setAddresses((prev) => prev.map((addr) => (addr.id === editingAddress.id ? { ...formData, id: addr.id, isDefault: addr.isDefault } : addr)));
+      setAddresses((prev) =>
+        prev.map((addr) =>
+          addr.id === editingAddress.id
+            ? { ...formData, id: addr.id, isDefault: addr.isDefault }
+            : addr
+        )
+      );
     } else {
       const newAddress = {
         ...formData,
@@ -115,7 +125,7 @@ export default function AddressPage() {
   };
 
   return (
-    <div>
+      <div className="grow flex flex-col">
         <Header
           title="Address"
           links={[
@@ -126,134 +136,240 @@ export default function AddressPage() {
           ]}
         />
 
-        {/* Progress Bar */}
-        <div className="px-6 py-4">
-          <div className="flex items-center justify-between relative">
-            <div className="absolute left-[22px] right-[22px] h-[1px] bg-gray-300">
-              <div className="w-2/3 h-full bg-[#8B4513]" />
-            </div>
-            <div className="flex flex-col items-center gap-1 z-10">
-              <div className="w-3 h-3 rounded-full bg-[#8B4513] border-2 border-[#8B4513]" />
-              <span className="text-xs text-[#8B4513]">Bag</span>
-            </div>
-            <div className="flex flex-col items-center gap-1 z-10">
-              <div className="w-3 h-3 rounded-full bg-[#8B4513] border-2 border-[#8B4513]" />
-              <span className="text-xs text-[#8B4513]">Address</span>
-            </div>
-            <div className="flex flex-col items-center gap-1 z-10">
-              <div className="w-3 h-3 rounded-full bg-white border-2 border-gray-300" />
-              <span className="text-xs text-gray-400">Payment</span>
-            </div>
-          </div>
-        </div>
+        <StatusBar activeStep={STATUS_STEPS.ADDRESS} />
 
-        <div className="px-4 space-y-4">
+        <div className="px-4 py-4 space-y-4 grow">
           {/* Add New Address Button */}
-          {!isAddingNew && (
-            <button onClick={() => setIsAddingNew(true)} className="flex items-center gap-2 w-full p-4 bg-white rounded-lg border border-dashed border-gray-300">
-              <MdAdd className="w-5 h-5" />
-              <span className="font-medium">Add New Address</span>
-            </button>
-          )}
+            {!isAddingNew && (
+              <button
+                onClick={() => setIsAddingNew(true)}
+                className="flex items-center gap-2 w-full px-4 py-3 rounded-md border border-dashed border-primary-100"
+              >
+                <MdAdd className="w-5 h-5 text-primary-100" />
+                <span className="text-[14px] font-medium text-primary-100 font-albert">Add New Address</span>
+              </button>
+            )}
 
           {/* Address Form */}
-          {isAddingNew && (
-            <div className="bg-white rounded-lg p-4">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="font-medium">{editingAddress ? "Edit Address" : "Add New Address"}</h2>
-                <button
-                  onClick={() => {
-                    setIsAddingNew(false);
-                    setEditingAddress(null);
-                    setErrors({});
-                  }}
-                >
-                  <MdClose className="w-5 h-5" />
-                </button>
-              </div>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid gap-4 md:grid-cols-2">
-                  <div>
-                    <input type="text" name="name" placeholder="Full Name *" value={formData.name} onChange={handleInputChange} className={`w-full p-3 border rounded-lg ${errors.name ? "border-red-500" : "border-gray-200"}`} />
-                    {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+          <AnimatePresence>
+            {isAddingNew && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="bg-primary-600 rounded-md p-4"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-[14px] font-medium text-gray-900 font-albert">
+                    {editingAddress ? "Edit Address" : "Add New Address"}
+                  </h2>
+                  <button
+                    onClick={() => {
+                      setIsAddingNew(false);
+                      setEditingAddress(null);
+                      setErrors({});
+                    }}
+                    className="p-2"
+                  >
+                    <MdClose className="w-5 h-5 text-gray-500" />
+                  </button>
+                </div>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div>
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="Full Name *"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        className={`w-full px-[9px] py-[5px] text-[14px] border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
+                          errors.name ? "border-red-400" : "border-primary-300"
+                        }`}
+                      />
+                      {errors.name && (
+                        <p className="text-red-400 text-xs mt-1 font-albert">{errors.name}</p>
+                      )}
+                    </div>
+                    <div>
+                      <input
+                        type="tel"
+                        name="phone"
+                        placeholder="Phone Number *"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        className={`w-full px-[9px] py-[5px] text-[14px] border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
+                          errors.phone ? "border-red-400" : "border-primary-300"
+                        }`}
+                      />
+                      {errors.phone && (
+                        <p className="text-red-400 text-xs mt-1 font-albert">{errors.phone}</p>
+                      )}
+                    </div>
                   </div>
                   <div>
-                    <input type="tel" name="phone" placeholder="Phone Number *" value={formData.phone} onChange={handleInputChange} className={`w-full p-3 border rounded-lg ${errors.phone ? "border-red-500" : "border-gray-200"}`} />
-                    {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                    <input
+                      type="text"
+                      name="address"
+                      placeholder="Address (House No, Building, Street) *"
+                      value={formData.address}
+                      onChange={handleInputChange}
+                      className={`w-full px-[9px] py-[5px] text-[14px] border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
+                        errors.address ? "border-red-400" : "border-primary-300"
+                      }`}
+                    />
+                    {errors.address && (
+                      <p className="text-red-400 text-xs mt-1 font-albert">{errors.address}</p>
+                    )}
                   </div>
-                </div>
-                <div>
-                  <input type="text" name="address" placeholder="Address (House No, Building, Street) *" value={formData.address} onChange={handleInputChange} className={`w-full p-3 border rounded-lg ${errors.address ? "border-red-500" : "border-gray-200"}`} />
-                  {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address}</p>}
-                </div>
-                <input type="text" name="area" placeholder="Area, Colony, Sector (Optional)" value={formData.area} onChange={handleInputChange} className="w-full p-3 border border-gray-200 rounded-lg" />
-                <div className="grid gap-4 md:grid-cols-2">
+                  <input
+                    type="text"
+                    name="area"
+                    placeholder="Area, Colony, Sector (Optional)"
+                    value={formData.area}
+                    onChange={handleInputChange}
+                    className="w-full px-[9px] py-[5px] text-[14px] border border-primary-300 rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert"
+                  />
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div>
+                      <input
+                        type="text"
+                        name="pincode"
+                        placeholder="Pincode *"
+                        value={formData.pincode}
+                        onChange={handleInputChange}
+                        className={`w-full px-[9px] py-[5px] text-[14px] border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
+                          errors.pincode ? "border-red-400" : "border-primary-300"
+                        }`}
+                      />
+                      {errors.pincode && (
+                        <p className="text-red-400 text-xs mt-1 font-albert">{errors.pincode}</p>
+                      )}
+                    </div>
+                    <div>
+                      <input
+                        type="text"
+                        name="city"
+                        placeholder="City *"
+                        value={formData.city}
+                        onChange={handleInputChange}
+                        className={`w-full px-[9px] py-[5px] text-[14px] border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
+                          errors.city ? "border-red-400" : "border-primary-300"
+                        }`}
+                      />
+                      {errors.city && (
+                        <p className="text-red-400 text-xs mt-1 font-albert">{errors.city}</p>
+                      )}
+                    </div>
+                  </div>
                   <div>
-                    <input type="text" name="pincode" placeholder="Pincode *" value={formData.pincode} onChange={handleInputChange} className={`w-full p-3 border rounded-lg ${errors.pincode ? "border-red-500" : "border-gray-200"}`} />
-                    {errors.pincode && <p className="text-red-500 text-xs mt-1">{errors.pincode}</p>}
+                    <input
+                      type="text"
+                      name="state"
+                      placeholder="State *"
+                      value={formData.state}
+                      onChange={handleInputChange}
+                      className={`w-full px-[9px] py-[5px] text-[14px] border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
+                        errors.state ? "border-red-400" : "border-primary-300"
+                      }`}
+                    />
+                    {errors.state && (
+                      <p className="text-red-400 text-xs mt-1 font-albert">{errors.state}</p>
+                    )}
                   </div>
-                  <div>
-                    <input type="text" name="city" placeholder="City *" value={formData.city} onChange={handleInputChange} className={`w-full p-3 border rounded-lg ${errors.city ? "border-red-500" : "border-gray-200"}`} />
-                    {errors.city && <p className="text-red-500 text-xs mt-1">{errors.city}</p>}
-                  </div>
-                </div>
-                <div>
-                  <input type="text" name="state" placeholder="State *" value={formData.state} onChange={handleInputChange} className={`w-full p-3 border rounded-lg ${errors.state ? "border-red-500" : "border-gray-200"}`} />
-                  {errors.state && <p className="text-red-500 text-xs mt-1">{errors.state}</p>}
-                </div>
-                <button type="submit" className="w-full py-3 bg-[#8B4513] text-white rounded-lg font-medium">
-                  {editingAddress ? "Save Changes" : "Save Address"}
-                </button>
-              </form>
-            </div>
-          )}
+                  <button
+                    type="submit"
+                    className="w-full py-3 bg-primary-100 text-white rounded-[6px] text-[14px] font-medium font-albert"
+                  >
+                    {editingAddress ? "Save Changes" : "Save Address"}
+                  </button>
+                </form>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Saved Addresses */}
-          <div className="space-y-4">
-            {addresses.map((address) => (
-              <div key={address.id} className="bg-white rounded-lg p-4">
-                <div className="flex items-start gap-3">
-                  <input type="radio" name="address" checked={selectedAddress === address.id} onChange={() => setSelectedAddress(address.id)} className="mt-1" />
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <h3 className="font-medium">{address.name}</h3>
-                        <p className="text-sm text-gray-500">{address.phone}</p>
-                      </div>
-                      <div className="flex gap-2">
-                        <button onClick={() => handleEdit(address)} className="p-1 text-gray-600 hover:text-gray-900">
-                          <MdEdit className="w-5 h-5" />
-                        </button>
-                        <button onClick={() => handleDelete(address.id)} className="p-1 text-gray-600 hover:text-gray-900">
-                          <MdDelete className="w-5 h-5" />
-                        </button>
+          <AnimatePresence>
+            {!isAddingNew && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="space-y-4"
+              >
+                {addresses.map((address) => (
+                  <motion.div
+                    key={address.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="bg-primary-600 rounded-md p-4"
+                  >
+                    <div className="flex items-start gap-3 cursor-pointer" onClick={() => setSelectedAddress(address.id)}>
+                      <input
+                        type="radio"
+                        name="address"
+                        checked={selectedAddress === address.id}
+                        className="mt-1.5 w-4 h-4 border-2 border-primary-100  focus:ring-primary-300 rounded-full appearance-none  relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:w-2 before:h-2 before:rounded-full before:transform before:-translate-x-1/2 before:-translate-y-1/2 checked:before:bg-primary-100"
+                      />
+                      <div className="flex-1">
+                        <div className="flex items-start justify-between">
+                          <div>
+                            <h3 className="text-[14px] font-medium text-gray-900 font-albert">
+                              {address.name}
+                            </h3>
+                            <p className="text-sm text-gray-500 font-albert">
+                              {address.phone}
+                            </p>
+                          </div>
+                          <div className="flex gap-2">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleEdit(address)
+                              }}
+                              className="p-1.5 text-secondary-200 rounded-full opacity-80"
+                            >
+                              <MdEdit className="w-4 h-4" />
+                            </button>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleDelete(address.id)
+                              }}
+                              className="p-1.5 text-red-100 rounded-full"
+                            >
+                              <MdDelete className="w-4 h-4" />
+                            </button>
+                          </div>
+                        </div>
+                        <p className="text-[14px] text-gray-600 mt-2 font-albert">
+                          {address.address}
+                        </p>
+                        {address.area && (
+                          <p className="text-[14px] text-gray-600 font-albert">
+                            {address.area}
+                          </p>
+                        )}
+                        <p className="text-[14px] text-gray-600 font-albert">
+                          {address.city}, {address.state} {address.pincode}
+                        </p>
+                        {address.isDefault && (
+                          <span className="inline-block mt-2 text-xs text-primary-100 bg-primary-300 px-2 py-0.5 rounded-[4px] font-albert">
+                            Default Address
+                          </span>
+                        )}
                       </div>
                     </div>
-                    <p className="text-sm text-gray-600 mt-2">{address.address}</p>
-                    {address.area && <p className="text-sm text-gray-600">{address.area}</p>}
-                    <p className="text-sm text-gray-600">
-                      {address.city}, {address.state} {address.pincode}
-                    </p>
-                    {address.isDefault && <span className="inline-block mt-2 text-xs text-[#8B4513] bg-[#8B4513]/10 px-2 py-1 rounded">Default Address</span>}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
-        {/* Continue Button */}
-        <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t">
-          <button
-            onClick={() => {
-              /* Handle continue to payment */
-            }}
-            disabled={!selectedAddress}
-            className="w-full py-3 bg-[#8B4513] text-white rounded-lg font-medium disabled:opacity-50"
-          >
-            Continue to Payment
-          </button>
-        </div>
-    </div>
+        <StickyButton>Continue to Payment</StickyButton>
+      </div>
   );
 }
+

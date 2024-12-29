@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import LikeIcon from "./LikeIcon";
 import { StarIcon } from "../libs/icons";
+import { formatPrice } from "../utils/utils";
 
 const ProductCard = ({ data }) => {
   return (
@@ -23,8 +24,8 @@ const ProductCard = ({ data }) => {
           1.6K
         </div>
         <div className="flex items-center gap-1.5">
-          <div className="text-[14px] leading-[19px]">₹{data.price}</div>
-          <div className="line-through opacity-60 text-[12px] leading-[16.56px]">₹{data.price}</div>
+          <div className="text-[14px] leading-[19px]">₹{formatPrice(data.price)}</div>
+          <div className="line-through opacity-60 text-[12px] leading-[16.56px]">₹{formatPrice(data.originalPrice)}</div>
           <div className="text-green-100 text-[12px] leading-[16px]">{data.discount}% off</div>
         </div>
       </div>

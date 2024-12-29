@@ -12,7 +12,7 @@ import LikedProductsPage from "../pages/LikedProducts/LikedProductsPage";
 
 const pageVariants = {
   initial: (direction) => ({
-    x: direction > 0 ? "50%" : "-50%",
+    x: direction > 0 ? "100%" : "-100%",
     opacity: 0,
   }),
   in: {
@@ -20,23 +20,16 @@ const pageVariants = {
     opacity: 1,
   },
   out: (direction) => ({
-    x: direction > 0 ? "-50%" : "50%",
+    x: direction > 0 ? "-100%" : "100%",
     opacity: 0,
   }),
 };
 
 const pageTransition = {
-  in: {
     type: "tween",
-    ease: "anticipate",
-    duration: 0.3, // Faster entry
-  },
-  out: {
-    type: "tween",
-    ease: "anticipate",
-    duration: 0.3, // Slower exit
-  },
-};
+    ease: "easeInOut",
+    duration: 0.3,
+  }
 
 const AnimatedOutlet = () => {
   const o = useOutlet();
@@ -60,7 +53,7 @@ const AnimatedRoutes = () => {
 
   return (
     <AnimatePresence initial={false} mode="wait" custom={direction}>
-      <motion.div key={location.pathname} custom={direction} initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition}>
+      <motion.div key={location.pathname} custom={direction} initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition} className="grow flex flex-col">
         <AnimatedOutlet />
       </motion.div>
     </AnimatePresence>

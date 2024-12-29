@@ -6,7 +6,7 @@ import { IconType } from "../libs/types";
 
 const Header = ({ title, links = [] }) => {
   return (
-    <div className="flex justify-between py-2.5 px-4 items-center">
+    <div className="flex justify-between py-2.5 px-4 items-center sticky top-0 bg-primary-500 z-10">
       <div className="flex gap-3 items-center">
         <BackButton />
         <span>{title}</span>
