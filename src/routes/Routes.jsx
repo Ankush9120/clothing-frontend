@@ -12,7 +12,7 @@ import LikedProductsPage from "../pages/LikedProducts/LikedProductsPage";
 
 const pageVariants = {
   initial: (direction) => ({
-    x: direction > 0 ? "50%" : "-50%",
+    // x: direction > 0 ? "30%" : "-30%",
     opacity: 0,
   }),
   in: {
@@ -21,15 +21,21 @@ const pageVariants = {
   },
   out: (direction) => ({
     x: direction > 0 ? "-50%" : "50%",
-    opacity: 0,
+    opacity: 1,
   }),
 };
 
-const pageTransition = {
-    type: "tween",
-    ease: "easeInOut",
-    duration: 0.3,
-  }
+const pageTransitionPosition = {
+  type: "tween",
+  ease: "easeInOut",
+  duration: 0.15,
+};
+
+const pageTransitionOpacity = {
+  type: "tween",
+  ease: "easeInOut",
+  duration: 0.4,
+};
 
 const AnimatedOutlet = () => {
   const o = useOutlet();
@@ -41,11 +47,23 @@ const AnimatedOutlet = () => {
 const AnimatedRoutes = () => {
   const location = useLocation();
   const navigationType = useNavigationType();
-  const direction = navigationType === "POP" ? -1 : 1
+  const direction = navigationType === "POP" ? -1 : 1;
 
   return (
     <AnimatePresence initial={false} mode="wait" custom={direction}>
-      <motion.div key={location.pathname} custom={direction} initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition} className="grow flex flex-col">
+      <motion.div
+        key={location.pathname}
+        custom={direction}
+        initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariants}
+        transition={{
+          x: pageTransitionPosition,
+          opacity: pageTransitionOpacity,
+        }}
+        className="grow flex flex-col"
+      >
         <AnimatedOutlet />
       </motion.div>
     </AnimatePresence>
@@ -100,3 +118,4 @@ const Routes = () => {
 };
 
 export default Routes;
+
