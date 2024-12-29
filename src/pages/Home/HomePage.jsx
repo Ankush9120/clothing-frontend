@@ -25,7 +25,7 @@ import { data1, data2 } from "../../libs/data";
 const HomePage = () => {
   const OutlineButton = ({ children }) => {
     return (
-      <button className="w-[118px] h-[32px] flex justify-center items-center text-primary-100 border-[1px] border-solid border-primary-100 gap-[15px] rounded-[7.3px] mx-auto text-[14px]">
+      <button className="w-[118px] h-[32px] flex justify-center items-center text-primary-100 border-[1px] border-solid border-primary-100 gap-[15px] rounded-[7.3px] mx-auto text-sm">
         {children} <img src={ArrowColored} className="h-[7px]" />
       </button>
     );
@@ -39,11 +39,11 @@ const HomePage = () => {
       <div className="px-3 mt-[17px]">
         <div className="relative overflow-hidden">
           <div className="absolute h-full max-w-[216px] flex flex-col justify-center items-center text-center ml-[13px]">
-            <p className="text-secondary-100 text-[14px] max-[400px]:text-[12px]">WEEKEND ONLY</p>
+            <p className="text-secondary-100 text-sm max-[400px]:text-[12px]">WEEKEND ONLY</p>
             <p className="font-[900] text-primary-100 text-[26px] leading-[39px] max-[400px]:text-[22px]">WINTER SALE</p>
-            <p className="text-secondary-100 font-semibold leading-[24px] mt-1 max-[400px]:text-[14px] max-[400px]:leading-[18px]">UP TO 50%</p>
-            <p className="text-secondary-100 text-[18px] leading-[18px] mt-2.5 max-[400px]:text-[14px] max-[400px]:leading-[18px]">Torem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            <button className="w-[118px] h-[32px] flex justify-center items-center bg-primary-100 text-white gap-[15px] rounded-[7.3px] mt-3 text-[14px] max-[400px]:scale-75">
+            <p className="text-secondary-100 font-semibold leading-[24px] mt-1 max-[400px]:text-sm max-[400px]:leading-[18px]">UP TO 50%</p>
+            <p className="text-secondary-100 text-[18px] leading-[18px] mt-2.5 max-[400px]:text-sm max-[400px]:leading-[18px]">Torem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <button className="w-[118px] h-[32px] flex justify-center items-center bg-primary-100 text-white gap-[15px] rounded-[7.3px] mt-3 text-sm max-[400px]:scale-75">
               Explore <img src={Arrow} className="h-[7px]" />
             </button>
           </div>
@@ -80,7 +80,7 @@ const HomePage = () => {
         <OutlineButton>View All</OutlineButton>
       </div>
 
-      <div className="text-[14px] py-[32px] px-[18px]">
+      <div className="text-sm py-[32px] px-[18px]">
         <p className=" relative before:[''] before:h-[1px] before:w-[70%] before:absolute before:bg-secondary-100 before:bottom-0">
           <span className="text-[32px] leading-[44px]">Summer</span>
           <span className="text-[18px] leading-[18px] ml-2">Collections</span>
@@ -94,7 +94,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="text-[14px] py-[32px] px-[18px]">
+      <div className="text-sm py-[32px] px-[18px]">
         <div className="flex justify-end relative before:[''] before:h-[1px] before:w-[70%] before:absolute before:bg-secondary-100 before:bottom-0">
           <p>
             <span className="text-[32px] leading-[44px]">Winter</span>
@@ -113,7 +113,7 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="text-[14px] py-[32px] px-[18px]">
+      <div className="text-sm py-[32px] px-[18px]">
         <div className="flex justify-center relative before:[''] before:h-[1px] before:w-[90%] before:absolute before:bg-secondary-100 before:bottom-0 pb-2">
           <p>
             <span className="text-[18px] leading-[18px]">What our</span>

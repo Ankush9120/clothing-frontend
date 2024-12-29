@@ -61,7 +61,7 @@ const SizeSelectionModal = ({ open, onClose, onConfirm, selectedSize, sizes, pro
               <div className="text-[12px] text-secondary-100 mb-1 font-albert">Delivery by Sat, 21 Dec - 110020</div>
               <div className="text-[12px] text-secondary-100 mb-6 font-albert">Seller: <b>LOREM TEXTILES PVT LTD</b></div>
 
-              <button onClick={handleAddToBag} className="w-full py-3 bg-primary-100 text-primary-500 rounded-lg flex items-center justify-center gap-2">
+              <button onClick={handleAddToBag} className="w-full py-3 bg-primary-100 text-primary-500 rounded-lg flex items-center justify-center gap-2 ripple">
                 <img src={BagColoredIcon} />
                 Add To Bag
               </button>

@@ -94,7 +94,7 @@ const ProductPage = () => {
 
       <div className="relative">
         <Carousel images={[image, image, image, image]} />
-        <div className="absolute bg-primary-500 rounded-[4px] flex items-center bottom-12 font-albert px-1 left-4 text-[14px] gap-1">
+        <div className="absolute bg-primary-500 rounded-[4px] flex items-center bottom-12 font-albert px-1 left-4 text-sm gap-1">
           4 <StarIcon className="text-yellow-100" /> <div className="w-0.5 bg-secondary-100 h-4  opacity-50" /> 1.6K
         </div>
       </div>
@@ -111,7 +111,7 @@ const ProductPage = () => {
         <div className="mt-[13px]">
           <div className="flex items-center">
             <div className="text-[18px]">₹{price}</div>
-            <div className="text-secondary-100 opacity-50 ml-[14px] text-[14px] line-through">₹8000</div>
+            <div className="text-secondary-100 opacity-50 ml-[14px] text-sm line-through">₹8000</div>
             <div className="text-green-100 ml-[9px]">{discount}% OFF</div>
           </div>
           <div className="text-secondary-100 opacity-50 text-[10px] leading-[12px]">Inclusive of all taxes</div>
@@ -167,8 +167,8 @@ const ProductPage = () => {
         <p className="text-secondary-100 opacity-60 text-[12px] mb-1">Enter pincode to know exact delivery dates/charges</p>
 
         <div className="flex items-center gap-2 mb-4 bg-primary-300 rounded-[4px] p-2">
-          <input type="text" placeholder="Pincode" value={pincode} onChange={(e) => setPincode(e.target.value)} className="flex-grow rounded text-[14px] focus:outline-none bg-transparent placeholder-secondary-100 placeholder:font-normal" />
-          <button onClick={handleCheckPincode} disabled={loading || !pincode} className="text-secondary-100 text-[14px] font-medium">
+          <input type="text" placeholder="Pincode" value={pincode} onChange={(e) => setPincode(e.target.value)} className="flex-grow rounded text-sm focus:outline-none bg-transparent placeholder-secondary-100 placeholder:font-normal" />
+          <button onClick={handleCheckPincode} disabled={loading || !pincode} className="text-secondary-100 text-sm font-medium">
             {loading ? "Checking..." : "Check"}
           </button>
         </div>
@@ -176,7 +176,7 @@ const ProductPage = () => {
         {deliveryInfo && (
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className={`rounded p-4 ${deliveryInfo.status === "success" ? "bg-green-50" : "bg-red-50"}`}>
             {deliveryInfo.status === "success" ? (
-              <div className="space-y-3 text-[14px]">
+              <div className="space-y-3 text-sm">
                 <div className="flex items-center gap-2 font-albert">
                   <span>Delivery by {deliveryInfo.delivery_date}</span>
                 </div>
@@ -188,12 +188,12 @@ const ProductPage = () => {
                 </div>
               </div>
             ) : (
-              <div className="text-red-600 text-[14px]">{deliveryInfo.message}</div>
+              <div className="text-red-600 text-sm">{deliveryInfo.message}</div>
             )}
           </motion.div>
         )}
 
-        <ul className="mt-4 space-y-2 text-[14px]">
+        <ul className="mt-4 space-y-2 text-sm">
           <li className="flex items-center">
             <span className="text-secondary-100 font-albert">• Free delivery on Rs 999+ orders</span>
           </li>
@@ -222,11 +222,11 @@ const ProductPage = () => {
                   <img src={BrandLogo} alt="" className="min-w-[44px] max-w-[44px] aspect-square" />
                 </div>
                 <div>
-                  <h4 className="text-[14px]">{coupon.description}</h4>
+                  <h4 className="text-sm">{coupon.description}</h4>
                   <p className="text-secondary-100 text-[12px] font-albert line-clamp-2 opacity-60">{coupon.details}</p>
                 </div>
               </div>
-              <div className="text-[14px] flex justify-between px-2.5 py-[5px] border-t border-primary-300">
+              <div className="text-sm flex justify-between px-2.5 py-[5px] border-t border-primary-300">
                 <div className="text-secondary-100">{coupon.code}</div>
                 <button className="text-primary-100 font-medium font-albert">Copy Code</button>
               </div>
@@ -239,7 +239,7 @@ const ProductPage = () => {
       {/* Details & Care Section */}
       <div className="p-[18px]">
         <h3 className="text-[18px] mb-3">Details & Care</h3>
-        <ul className="text-secondary-100 text-[14px] space-y-1 *:font-albert">
+        <ul className="text-secondary-100 text-sm space-y-1 *:font-albert">
           <li>• Regular Fit</li>
           <li>• Package contains: 1 Jacket</li>
           <li>• Dry clean</li>
@@ -251,7 +251,7 @@ const ProductPage = () => {
       {/* Easy Returns Section */}
       <div className="p-[18px]">
         <h3 className="mb-2">Easy 7 days returns and exchanges</h3>
-        <p className="text-secondary-100 text-[14px] font-albert">Choose to return or exchange for a different size (if available) within 7 days.</p>
+        <p className="text-secondary-100 text-sm font-albert">Choose to return or exchange for a different size (if available) within 7 days.</p>
       </div>
 
       {/* Ratings & Reviews Section */}
@@ -261,7 +261,7 @@ const ProductPage = () => {
           <div className="text-[26px] flex items-center gap-2 grow">
             4.1 <StarIcon />
           </div>
-          <div className="text-[14px] flex grow h-10 *:grow *:border-l-[1px] *:border-primary-200 *:px-5">
+          <div className="text-sm flex grow h-10 *:grow *:border-l-[1px] *:border-primary-200 *:px-5">
             <div>
               <div>852</div> <div>Ratings</div>
             </div>
@@ -298,15 +298,15 @@ const ProductPage = () => {
             <div className="bg-green-100 text-white px-2 py-1 rounded-md text-[12px]">4 ★</div>
             <span className="text-secondary-100 text-[12px]">2 years ago</span>
           </div>
-          <p className="text-secondary-100 text-[14px] mb-2">
+          <p className="text-secondary-100 text-sm mb-2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per....
             <span className="text-secondary-100 cursor-pointer">read more</span>
           </p>
-          <div className="text-secondary-100 text-[14px] bg-primary-300 rounded-[5px] px-[7px] py-[3px] w-max">
+          <div className="text-secondary-100 text-sm bg-primary-300 rounded-[5px] px-[7px] py-[3px] w-max">
             <span className="font-semibold">Size bought:</span> S
           </div>
         </div>
-        <button className="text-primary-100 font-semibold mt-3 text-[14px] font-albert">View all 31 reviews</button>
+        <button className="text-primary-100 font-semibold mt-3 text-sm font-albert">View all 31 reviews</button>
       </div>
 
       {/* Similar Products Section */}

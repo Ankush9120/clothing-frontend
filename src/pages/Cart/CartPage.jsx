@@ -114,12 +114,12 @@ const CartPage = () => {
             <div key={coupon.id} className="border border-primary-300 p-2 rounded-md mb-3 ">
               <div className="grid gap-3">
                 <div>
-                  <p className="text-[14px]">Extra 10% off</p>
-                  <p className="text-secondary-100 opacity-60 text-[14px] font-albert">{coupon.description}</p>
+                  <p className="text-sm">Extra 10% off</p>
+                  <p className="text-secondary-100 opacity-60 text-sm font-albert">{coupon.description}</p>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="border border-dashed border-green-100 bg-green-300 px-2 py-0.5 text-[12px] rounded">{coupon.code}</span>
-                  <button className="text-primary-100 font-medium border border-primary-100 px-[9px] py-[5px] rounded-[4px] font-albert text-[14px] leading-[16px]" onClick={() => applyCoupon(coupon)}>
+                  <button className="text-primary-100 font-medium border border-primary-100 px-[9px] py-[5px] rounded-[4px] font-albert text-sm leading-[16px]" onClick={() => applyCoupon(coupon)}>
                     Apply Coupon
                   </button>
                 </div>
@@ -134,7 +134,7 @@ const CartPage = () => {
         <h3 className="font-medium mb-4">
           Price Details ({cartItems.length} {cartItems.length === 1 ? "Item" : "Items"})
         </h3>
-        <div className="space-y-3 text-secondary-100 text-[14px]">
+        <div className="space-y-3 text-secondary-100 text-sm">
           <div className="flex justify-between">
             <span className="font-albert">Total MRP</span>
             <span>₹{formatPrice(calculateTotalMRP())}</span>

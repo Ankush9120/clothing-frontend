@@ -124,7 +124,7 @@ const Sidebar = () => {
             <div className="mt-[30px] font-albert grid gap-5">
               {menuItems.map((section, idx) => (
                 <div key={idx}>
-                  <p className="text-[14px] text-secondary-100 opacity-50 !font-alata mb-4">{section.heading}</p>
+                  <p className="text-sm text-secondary-100 opacity-50 !font-alata mb-4">{section.heading}</p>
                   {section.items.map((item, itemIdx) => (
                     <Link key={itemIdx} to={item?.to} onClick={() => dispatch(setSidebar(false))}>
                       <button className="flex items-center w-full hover:bg-black/5 py-[18px] px-[15px] rounded-[10px]">

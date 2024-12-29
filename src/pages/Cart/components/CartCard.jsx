@@ -39,7 +39,7 @@ const CartCard = ({ product }) => {
           </div>
 
           <div className="mt-2 flex items-center gap-2 text-secondary-100 text-[12px]">
-            <span className="text-[14px]">₹{formatPrice(itemTotal)}</span>
+            <span className="text-sm">₹{formatPrice(itemTotal)}</span>
             <span className="opacity-50 font-albert">₹{formatPrice(originalPrice * quantity)}</span>
             <span className="text-green-100 font-albert">{calculateDiscount(originalPrice, price)}% OFF</span>
           </div>

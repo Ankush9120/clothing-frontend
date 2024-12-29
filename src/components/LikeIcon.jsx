@@ -18,7 +18,7 @@ const LikeIcon = ({ product, className }) => {
   return (
     <motion.div className={`bg-white bg-opacity-[26%] size-6 grid place-items-center rounded-full cursor-pointer ${className}`} onClick={handleLike} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
       <motion.div animate={isLiked ? { scale: [1, 1.2, 1] } : { scale: 1 }} transition={{ duration: 0.3, type: "spring", stiffness: 500 }}>
-        <HeartIcon className={`text-[14px] stroke-white ${isLiked ? "*:fill-red-100 !stroke-red-100" : ""}`} />
+        <HeartIcon className={`text-sm stroke-white ${isLiked ? "*:fill-red-100 !stroke-red-100" : ""}`} />
       </motion.div>
     </motion.div>
   );

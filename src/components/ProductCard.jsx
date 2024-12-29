@@ -24,7 +24,7 @@ const ProductCard = ({ data }) => {
           1.6K
         </div>
         <div className="flex items-center gap-1.5">
-          <div className="text-[14px] leading-[19px]">₹{formatPrice(data.price)}</div>
+          <div className="text-sm leading-[19px]">₹{formatPrice(data.price)}</div>
           <div className="line-through opacity-60 text-[12px] leading-[16.56px]">₹{formatPrice(data.originalPrice)}</div>
           <div className="text-green-100 text-[12px] leading-[16px]">{data.discount}% off</div>
         </div>

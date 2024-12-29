@@ -146,7 +146,7 @@ export default function AddressPage() {
                 className="flex items-center gap-2 w-full px-4 py-3 rounded-md border border-dashed border-primary-100"
               >
                 <MdAdd className="w-5 h-5 text-primary-100" />
-                <span className="text-[14px] font-medium text-primary-100 font-albert">Add New Address</span>
+                <span className="text-sm font-medium text-primary-100 font-albert">Add New Address</span>
               </button>
             )}
 
@@ -160,7 +160,7 @@ export default function AddressPage() {
                 className="bg-primary-600 rounded-md p-4"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-[14px] font-medium text-gray-900 font-albert">
+                  <h2 className="text-sm font-medium text-gray-900 font-albert">
                     {editingAddress ? "Edit Address" : "Add New Address"}
                   </h2>
                   <button
@@ -183,7 +183,7 @@ export default function AddressPage() {
                         placeholder="Full Name *"
                         value={formData.name}
                         onChange={handleInputChange}
-                        className={`w-full px-[9px] py-[5px] text-[14px] border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
+                        className={`w-full px-[9px] py-[5px] text-sm border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
                           errors.name ? "border-red-400" : "border-primary-300"
                         }`}
                       />
@@ -198,7 +198,7 @@ export default function AddressPage() {
                         placeholder="Phone Number *"
                         value={formData.phone}
                         onChange={handleInputChange}
-                        className={`w-full px-[9px] py-[5px] text-[14px] border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
+                        className={`w-full px-[9px] py-[5px] text-sm border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
                           errors.phone ? "border-red-400" : "border-primary-300"
                         }`}
                       />
@@ -214,7 +214,7 @@ export default function AddressPage() {
                       placeholder="Address (House No, Building, Street) *"
                       value={formData.address}
                       onChange={handleInputChange}
-                      className={`w-full px-[9px] py-[5px] text-[14px] border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
+                      className={`w-full px-[9px] py-[5px] text-sm border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
                         errors.address ? "border-red-400" : "border-primary-300"
                       }`}
                     />
@@ -228,7 +228,7 @@ export default function AddressPage() {
                     placeholder="Area, Colony, Sector (Optional)"
                     value={formData.area}
                     onChange={handleInputChange}
-                    className="w-full px-[9px] py-[5px] text-[14px] border border-primary-300 rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert"
+                    className="w-full px-[9px] py-[5px] text-sm border border-primary-300 rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert"
                   />
                   <div className="grid gap-4 md:grid-cols-2">
                     <div>
@@ -238,7 +238,7 @@ export default function AddressPage() {
                         placeholder="Pincode *"
                         value={formData.pincode}
                         onChange={handleInputChange}
-                        className={`w-full px-[9px] py-[5px] text-[14px] border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
+                        className={`w-full px-[9px] py-[5px] text-sm border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
                           errors.pincode ? "border-red-400" : "border-primary-300"
                         }`}
                       />
@@ -253,7 +253,7 @@ export default function AddressPage() {
                         placeholder="City *"
                         value={formData.city}
                         onChange={handleInputChange}
-                        className={`w-full px-[9px] py-[5px] text-[14px] border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
+                        className={`w-full px-[9px] py-[5px] text-sm border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
                           errors.city ? "border-red-400" : "border-primary-300"
                         }`}
                       />
@@ -269,7 +269,7 @@ export default function AddressPage() {
                       placeholder="State *"
                       value={formData.state}
                       onChange={handleInputChange}
-                      className={`w-full px-[9px] py-[5px] text-[14px] border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
+                      className={`w-full px-[9px] py-[5px] text-sm border rounded-[4px] bg-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-100 font-albert ${
                         errors.state ? "border-red-400" : "border-primary-300"
                       }`}
                     />
@@ -279,7 +279,7 @@ export default function AddressPage() {
                   </div>
                   <button
                     type="submit"
-                    className="w-full py-3 bg-primary-100 text-white rounded-[6px] text-[14px] font-medium font-albert"
+                    className="w-full py-3 bg-primary-100 text-white rounded-[6px] text-sm font-medium font-albert"
                   >
                     {editingAddress ? "Save Changes" : "Save Address"}
                   </button>
@@ -315,7 +315,7 @@ export default function AddressPage() {
                       <div className="flex-1">
                         <div className="flex items-start justify-between">
                           <div>
-                            <h3 className="text-[14px] font-medium text-gray-900 font-albert">
+                            <h3 className="text-sm font-medium text-gray-900 font-albert">
                               {address.name}
                             </h3>
                             <p className="text-sm text-gray-500 font-albert">
@@ -343,15 +343,15 @@ export default function AddressPage() {
                             </button>
                           </div>
                         </div>
-                        <p className="text-[14px] text-gray-600 mt-2 font-albert">
+                        <p className="text-sm text-gray-600 mt-2 font-albert">
                           {address.address}
                         </p>
                         {address.area && (
-                          <p className="text-[14px] text-gray-600 font-albert">
+                          <p className="text-sm text-gray-600 font-albert">
                             {address.area}
                           </p>
                         )}
-                        <p className="text-[14px] text-gray-600 font-albert">
+                        <p className="text-sm text-gray-600 font-albert">
                           {address.city}, {address.state} {address.pincode}
                         </p>
                         {address.isDefault && (

@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { setSidebar } from "../store/slices/sidebarSlice";
 import { Link } from "react-router-dom";
+import CartIcon from "./CartIcon";
 
 const Avatar = "/assets/images/avatar.png";
 const Menu = "/assets/images/menu.png";
@@ -19,7 +20,7 @@ const Navbar = () => {
           <img src={Heart} alt="" />
         </Link>
         <Link to="/cart">
-          <img src={Bag} alt="" />
+          <CartIcon />
         </Link>
         {/* <img src={Avatar} alt="" /> */}
       </div>

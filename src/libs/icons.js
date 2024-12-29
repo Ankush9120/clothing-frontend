@@ -20,6 +20,10 @@ export const DeliveredIcon = "/assets/icons/delivered.svg";
 
 export const CancelledIcon = "/assets/icons/cancelled.svg";
 
+export const CancelledColoredIcon = "/assets/icons/cancelled-colored.svg";
+
+export const CashIcon = "/assets/icons/cash.svg";
+
 export { IoHeartOutline as HeartIcon } from "react-icons/io5";
 
 export { IoMdStar as StarIcon } from "react-icons/io";
@@ -31,3 +35,5 @@ export { BiSolidDislike as ThumbsDownIcon } from "react-icons/bi";
 export { IoClose as CloseIcon } from "react-icons/io5";
 
 export { IoMdRadioButtonOn as RadioIcon } from "react-icons/io";
+
+export { MdChevronRight as RightArrowIcon , MdStar as StarFilledIcon, MdStarBorder as StarOutlinedIcon } from "react-icons/md";

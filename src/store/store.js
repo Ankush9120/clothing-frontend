@@ -4,6 +4,7 @@ import likedProductsReducer from './slices/likedProductsSlice';
 import productReducer from './slices/productSlice';
 import userReducer from './slices/userSlice';
 import cartReducer from './slices/cartSlice';
+import ordersReducer from "./slices/ordersSlice";
 
 const localStorageMiddleware = ({ getState }) => {
   return next => action => {
@@ -30,6 +31,7 @@ export const store = configureStore({
     products: productReducer,
     user: userReducer,
     cart: cartReducer,
+    orders: ordersReducer
   },
   preloadedState: reHydrateStore(),
   middleware: (getDefaultMiddleware) => 
