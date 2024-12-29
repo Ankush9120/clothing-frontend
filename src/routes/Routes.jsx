@@ -12,7 +12,6 @@ import LikedProductsPage from "../pages/LikedProducts/LikedProductsPage";
 
 const pageVariants = {
   initial: (direction) => ({
-    // x: direction > 0 ? "30%" : "-30%",
     opacity: 0,
   }),
   in: {
@@ -20,7 +19,7 @@ const pageVariants = {
     opacity: 1,
   },
   out: (direction) => ({
-    x: direction > 0 ? "-50%" : "50%",
+    x: direction > 0 ? "-100%" : "100%",
     opacity: 1,
   }),
 };
