@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { motion } from "framer-motion";
+import { Link, useParams } from "react-router-dom";
 import ProductHeader from "./components/ProductHeader";
-import Carousel from "../../components/Carousel";
-import LikeIcon from "../../components/LikeIcon";
-import Icon from "../../components/Icon";
-import { BagColoredIcon, BagIcon, BrandLogo, DiscountIcon, StarIcon, ThumbsDownIcon, ThumbsUpIcon } from "../../libs/icons";
-import ProductCard from "../../components/ProductCard";
+import ProductImages from "./components/ProductImages";
+import ProductInfo from "./components/ProductInfo";
+import ColorSelection from "./components/ColorSelection";
+import SizeSelection from "./components/SizeSelection";
+import DeliveryInfo from "./components/DeliveryInfo";
+import CouponsSection from "./components/CouponsSection";
+import DetailsAndCare from "./components/DetailsAndCare";
+import EasyReturns from "./components/EasyReturns";
+import RatingsAndReviews from "./components/RatingsAndReviews";
+import CustomerReviews from "./components/CustomerReviews";
+import SimilarProducts from "./components/SimilarProducts";
+import { BagColoredIcon } from "../../libs/icons";
 import { addToCart } from "../../store/slices/cartSlice";
-import { similar_products } from "../../libs/data";
-import CustomerPhotos from "./components/CustomerPhotos";
 import SizeSelectionModal from "./components/SizeSelectionModal";
 import StickyButton from "../../components/StickyButton";
 
@@ -18,314 +22,106 @@ const ProductPage = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products.products);
-  const product = products.find((p) => p.id == productId);
-  const productAlreadyInCart = useSelector((state) => state.cart.items.find((item) => item.id === productId));
-  const { image, title, description, price, discount } = product || {};
-  const [selectedColor, setSelectedColor] = useState("Yellow");
-  const [addedToBagConfirmation, setAddedToBagConfirmation] = useState(false);
-  const [selectedSize, setSelectedSize] = useState("");
-  const [pincode, setPincode] = useState("");
-  const [deliveryInfo, setDeliveryInfo] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [addedToBag, setAddedToBag] = useState(false);
+  const similar_products = useSelector((state) => state.products.products);
+  const cartItems = useSelector((state) => state.cart.items);
+  const product = [...products, ...similar_products].find((p) => p.id == productId);
+  const productAlreadyInCart = cartItems.find((item) => item.id == productId);
 
-  const sizes = [
-    { label: "XS", count: 5 },
-    { label: "S", count: 4 },
-    { label: "M", count: 6 },
-    { label: "L", count: 3 },
-    { label: "XL", count: 1 },
-  ];
+  const [selectedColor, setSelectedColor] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  const [addedToBagConfirmation, setAddedToBagConfirmation] = useState(false);
+  const [addedToBag, setAddedToBag] = useState(false);
+  
+  useEffect(() => {
+    if (product && product.colors && product.colors.length > 0) {
+      setSelectedColor(product.colors[0]);
+    }
+  }, [product]);
 
   useLayoutEffect(() => {
-    window.screenTop = 0;
-  },[])
-
-  const handleCheckPincode = () => {
-    setLoading(true);
-    // Simulate API call with random response
-    new Promise((resolve) => setTimeout(resolve, 500)).then(() => {
-      const random = Math.floor(Math.random() * 10) + 1;
-      const isDeliverable = random > 3;
-
-      if (isDeliverable) {
-        const date = new Date();
-        date.setDate(date.getDate() + 7);
-        const delivery_date = date.toLocaleDateString("en-US", {
-          weekday: "short",
-          day: "numeric",
-          month: "short",
-        });
-
-        setDeliveryInfo({
-          status: "success",
-          delivery_date,
-          cod_available: true,
-          free_delivery: true,
-        });
-      } else {
-        setDeliveryInfo({
-          status: "error",
-          message: "Delivery unavailable for this pincode. Please try another.",
-        });
-      }
-      setLoading(false);
-    });
-  };
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleAddToBag = () => {
-    dispatch(
-      addToCart({
-        ...product,
-        size: selectedSize,
-      })
-    );
-    setAddedToBag(true);
+    if (!productAlreadyInCart && selectedSize) {
+      dispatch(
+        addToCart({
+          ...product,
+          size: selectedSize,
+          color: selectedColor,
+        })
+      );
+      setAddedToBag(true);
+      setAddedToBagConfirmation(false);
+    }
   };
 
   const handleAddToBagConfirmation = () => {
-    if(productAlreadyInCart) return;
-    setAddedToBagConfirmation(true)
+    if (productAlreadyInCart) return;
+    setAddedToBagConfirmation(true);
+  };
+
+  if (!product) {
+    return <div>Product not found</div>;
   }
 
   return (
     <div>
-      <ProductHeader productId={productId} />
-
-      <div className="relative">
-        <Carousel images={[image, image, image, image]} />
-        <div className="absolute bg-primary-500 rounded-[4px] flex items-center bottom-12 font-albert px-1 left-4 text-sm gap-1">
-          4 <StarIcon className="text-yellow-100" /> <div className="w-0.5 bg-secondary-100 h-4  opacity-50" /> 1.6K
-        </div>
-      </div>
-
-      <div className="p-[18px]">
-        <div className="flex justify-between items-center gap-2.5">
-          <div className="grid gap-1.5">
-            <div className="uppercase leading-[22px]">{title}</div>
-            <div className="text-[12px] leading-[14px]">{description}</div>
-          </div>
-          <LikeIcon product={product} className="bg-white *:stroke-black" />
-        </div>
-
-        <div className="mt-[13px]">
-          <div className="flex items-center">
-            <div className="text-[18px]">₹{price}</div>
-            <div className="text-secondary-100 opacity-50 ml-[14px] text-sm line-through">₹8000</div>
-            <div className="text-green-100 ml-[9px]">{discount}% OFF</div>
-          </div>
-          <div className="text-secondary-100 opacity-50 text-[10px] leading-[12px]">Inclusive of all taxes</div>
-        </div>
-
-        <div className="py-[11px] px-[9px] rounded-[4px] bg-gradient-to-r from-green-200 to-green-300 flex justify-between mt-3 text-[12px] items-center">
-          <div className="flex items-center gap-[14px] text-green-100">
-            <Icon icon={DiscountIcon} className="p-0" />
-            <span>Get it for</span>
-          </div>
-          <span className="text-primary-100 font-semibold">How ?</span>
-        </div>
-      </div>
+      <ProductHeader productId={productId} cartItemsCount={cartItems.length} />
+      <ProductImages images={Array.from({length: 6}).map(() => product.image) || []} />
+      <ProductInfo
+        title={product.title}
+        description={product.description}
+        price={product.price}
+        discount={product.discount}
+      />
       <hr />
-
-      <div className="p-[18px] pr-0">
-        <div className="grid gap-4">
-          <div className="flex gap-1.5">
-            Color <div className="text-secondary-100 opacity-50">· {selectedColor}</div>
-          </div>
-          <div className="flex gap-2 overflow-x-auto pr-[18px]">
-            {["Yellow", "Red", "Blue", "Green", "Orange", "Purple"].map((color, idx) => (
-              <div key={idx} className={`min-w-[80px] w-[80px] h-[100px] border-[1px] ${selectedColor === color ? "border-primary-100" : "border-transparent"}`} onClick={() => setSelectedColor(color)}>
-                <img src={image} alt={color} className="w-full h-full" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      <ColorSelection
+        selectedColor={selectedColor}
+        setSelectedColor={setSelectedColor}
+        colors={product.colors || []}
+        image={product.image}
+      />
       <hr />
-      <div className="p-[18px] grid gap-[18px]">
-        <div className="flex justify-between">
-          <span className="text-secondary-100">Select Size</span>
-          <span className="text-primary-100 cursor-pointer">Size Guide</span>
-        </div>
-
-        <div className="flex gap-2">
-          {sizes.map((size) => (
-            <div key={size.label} className="flex flex-col items-center">
-              <div className={`size-10 border rounded grid place-items-center ${selectedSize === size.label ? "bg-primary-100 !border-primary-100 text-white" : "border-[1px] border-secondary-100"} ${size.count <= 2 ? "border-red-100" : ""}`} onClick={() => setSelectedSize(size.label)}>
-                {size.label}
-              </div>
-              {size.count <= 2 && <span className="text-red-500 text-xs mt-1">{size.count} left</span>}
-            </div>
-          ))}
-        </div>
-      </div>
-
+      <SizeSelection
+        sizes={product.sizes || []}
+        selectedSize={selectedSize}
+        setSelectedSize={setSelectedSize}
+      />
       <hr />
-      {/* Check delivery date section */}
-      <div className="p-[18px]">
-        <h3 className="mb-1">Check delivery date</h3>
-        <p className="text-secondary-100 opacity-60 text-[12px] mb-1">Enter pincode to know exact delivery dates/charges</p>
-
-        <div className="flex items-center gap-2 mb-4 bg-primary-300 rounded-[4px] p-2">
-          <input type="text" placeholder="Pincode" value={pincode} onChange={(e) => setPincode(e.target.value)} className="flex-grow rounded text-sm focus:outline-none bg-transparent placeholder-secondary-100 placeholder:font-normal" />
-          <button onClick={handleCheckPincode} disabled={loading || !pincode} className="text-secondary-100 text-sm font-medium">
-            {loading ? "Checking..." : "Check"}
-          </button>
-        </div>
-
-        {deliveryInfo && (
-          <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className={`rounded p-4 ${deliveryInfo.status === "success" ? "bg-green-50" : "bg-red-50"}`}>
-            {deliveryInfo.status === "success" ? (
-              <div className="space-y-3 text-sm">
-                <div className="flex items-center gap-2 font-albert">
-                  <span>Delivery by {deliveryInfo.delivery_date}</span>
-                </div>
-                <div className="flex items-center gap-2 font-albert">
-                  <span>Pay on Delivery available</span>
-                </div>
-                <div className="flex items-center gap-2 font-albert">
-                  <span>7-day return and exchange</span>
-                </div>
-              </div>
-            ) : (
-              <div className="text-red-600 text-sm">{deliveryInfo.message}</div>
-            )}
-          </motion.div>
-        )}
-
-        <ul className="mt-4 space-y-2 text-sm">
-          <li className="flex items-center">
-            <span className="text-secondary-100 font-albert">• Free delivery on Rs 999+ orders</span>
-          </li>
-          <li className="flex items-center">
-            <span className="text-secondary-100 font-albert">• COD on Rs 500+ orders</span>
-          </li>
-          <li className="flex items-center">
-            <span className="text-secondary-100 font-albert">• 7-day return and size exchange</span>
-          </li>
-        </ul>
-      </div>
+      <DeliveryInfo />
       <hr />
-
-      {/* Coupons Section */}
-      <div className="py-3 pl-[18px] bg-primary-600">
-        <span className="mb-1">Coupons</span>
-        <p className="text-secondary-100 text-[12px] mb-3 font-albert">Apply any of these coupons on bag during checkout</p>
-        <div className="flex gap-3 overflow-x-auto pr-[18px]">
-          {[
-            { code: "LRFLAT10", description: "Extra 10% off", details: "Get extra 10% off on your first purchase. Maximum Discount." },
-            { code: "LRNEW15", description: "Extra 15% off", details: "Get extra 15% off on selected products." },
-          ].map((coupon, idx) => (
-            <div key={idx} className="border border-primary-300 rounded-lg bg-primary-500 min-w-[285px] max-w-[285px]">
-              <div className="p-3 flex gap-2.5">
-                <div className="flex items-center">
-                  <img src={BrandLogo} alt="" className="min-w-[44px] max-w-[44px] aspect-square" />
-                </div>
-                <div>
-                  <h4 className="text-sm">{coupon.description}</h4>
-                  <p className="text-secondary-100 text-[12px] font-albert line-clamp-2 opacity-60">{coupon.details}</p>
-                </div>
-              </div>
-              <div className="text-sm flex justify-between px-2.5 py-[5px] border-t border-primary-300">
-                <div className="text-secondary-100">{coupon.code}</div>
-                <button className="text-primary-100 font-medium font-albert">Copy Code</button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <CouponsSection />
       <hr />
-
-      {/* Details & Care Section */}
-      <div className="p-[18px]">
-        <h3 className="text-[18px] mb-3">Details & Care</h3>
-        <ul className="text-secondary-100 text-sm space-y-1 *:font-albert">
-          <li>• Regular Fit</li>
-          <li>• Package contains: 1 Jacket</li>
-          <li>• Dry clean</li>
-          <li>• 100% Wool</li>
-        </ul>
-      </div>
+      <DetailsAndCare details={product.details || []} />
       <hr />
-
-      {/* Easy Returns Section */}
-      <div className="p-[18px]">
-        <h3 className="mb-2">Easy 7 days returns and exchanges</h3>
-        <p className="text-secondary-100 text-sm font-albert">Choose to return or exchange for a different size (if available) within 7 days.</p>
-      </div>
-
-      {/* Ratings & Reviews Section */}
-      <div className="p-[18px]">
-        <h3 className="mb-2">Ratings & Reviews</h3>
-        <div className="flex items-center gap-3 border-[1px] border-primary-200 rounded-[4px] py-3 px-5 text-secondary-100 bg-primary-300">
-          <div className="text-[26px] flex items-center gap-2 grow">
-            4.1 <StarIcon />
-          </div>
-          <div className="text-sm flex grow h-10 *:grow *:border-l-[1px] *:border-primary-200 *:px-5">
-            <div>
-              <div>852</div> <div>Ratings</div>
-            </div>
-            <div>
-              <div>52</div> <div>Reviews</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <EasyReturns />
       <hr />
+      <RatingsAndReviews rating={product.rating} reviewCount={product.reviewCount} />
+      <hr />
+      <CustomerReviews reviews={product.reviews || []} />
+      <hr />
+      <SimilarProducts products={similar_products || []} />
 
-      {/* Customer Photos & Reviews Section */}
-      <div className="p-[18px]">
-        <CustomerPhotos images={Array.from({length: 20}).map(d => image)} />
+      <Link to={productAlreadyInCart ? "/cart" : undefined}>
+        <StickyButton onClick={handleAddToBagConfirmation} icon={BagColoredIcon}>
+          {productAlreadyInCart ? "Go to Bag" : `Add to Bag ₹${product.price}`}
+        </StickyButton>
+      </Link>
 
-        <h3 className="mb-3">Customer Reviews (52)</h3>
-        <div className="flex gap-1.5 flex-wrap mb-4 *:py-2.5 *:px-3 *:border-[1px] *:border-primary-400 *:flex *:items-center *:gap-1.5 *:font-albert *:font-medium">
-          <span className="px-2 py-1 rounded-full text-[12px]">
-            <ThumbsUpIcon className="text-green-100" /> Nice product quality
-          </span>
-          <span className="px-2 py-1 rounded-full text-[12px]">
-            <ThumbsUpIcon className="text-green-100" /> Great fit
-          </span>
-          <span className="px-2 py-1 rounded-full text-[12px]">
-            <ThumbsUpIcon className="text-green-100" /> Lightweight
-          </span>
-          <span className="px-2 py-1 rounded-full text-[12px]">
-            <ThumbsDownIcon className="text-red-100" /> Not worth the money
-          </span>
-        </div>
-
-        <div className="border rounded-md font-albert">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="bg-green-100 text-white px-2 py-1 rounded-md text-[12px]">4 ★</div>
-            <span className="text-secondary-100 text-[12px]">2 years ago</span>
-          </div>
-          <p className="text-secondary-100 text-sm mb-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per....
-            <span className="text-secondary-100 cursor-pointer">read more</span>
-          </p>
-          <div className="text-secondary-100 text-sm bg-primary-300 rounded-[5px] px-[7px] py-[3px] w-max">
-            <span className="font-semibold">Size bought:</span> S
-          </div>
-        </div>
-        <button className="text-primary-100 font-semibold mt-3 text-sm font-albert">View all 31 reviews</button>
-      </div>
-
-      {/* Similar Products Section */}
-      <div className="p-[18px]">
-        <h3 className="text-[16px] mb-[15px]">Similar Products</h3>
-        <div className="grid gap-4 grid-cols-2">
-          {similar_products.map((product) => (
-            <ProductCard key={product.id} data={product} />
-          ))}
-        </div>
-      </div>
-
-      <StickyButton onClick={handleAddToBagConfirmation} icon={BagColoredIcon}>
-        {addedToBag ? "Added to Bag" : `Add to Bag ₹${price}`}
-      </StickyButton>
-
-      <SizeSelectionModal open={addedToBagConfirmation} onClose={() => setAddedToBagConfirmation(false)} sizes={sizes} product={product} onConfirm={handleAddToBag} selectedSize={selectedSize} setSelectedSize={setSelectedSize} />
+      <SizeSelectionModal
+        open={addedToBagConfirmation}
+        onClose={() => setAddedToBagConfirmation(false)}
+        sizes={product.sizes || []}
+        product={product}
+        onConfirm={handleAddToBag}
+        selectedSize={selectedSize}
+        setSelectedSize={setSelectedSize}
+        isProductInCart={!!productAlreadyInCart}
+      />
     </div>
   );
 };
 
 export default ProductPage;
+

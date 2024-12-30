@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { data1, data2, similar_products } from '../../libs/data';
+import { productData, similar_products } from '../../libs/data';
 
 const initialState = {
-  products: [...data1, ...data2, ...similar_products]
+  products: productData,
+  similarProducts: similar_products
 };
 
 const productSlice = createSlice({

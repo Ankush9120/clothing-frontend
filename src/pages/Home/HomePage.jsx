@@ -20,7 +20,7 @@ import SearchBar from "../../components/SearchBar";
 import Categories from "./components/Categories";
 import FlashSale from "./components/FlashSale";
 import Navbar from "../../components/Navbar";
-import { data1, data2 } from "../../libs/data";
+import { productData as data1, trendingProducts as data2 } from "../../libs/data";
 
 const HomePage = () => {
   const OutlineButton = ({ children }) => {

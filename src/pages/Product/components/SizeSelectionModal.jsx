@@ -1,17 +1,22 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { BagColoredIcon, CloseIcon } from "../../../libs/icons";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const SizeSelectionModal = ({ open, onClose, onConfirm, selectedSize, sizes, product, setSelectedSize }) => {
+  const cart = useSelector((state) => state?.cart?.items);
+
   if (!product) return null;
 
+  const isExistInCart = cart.find((d) => d?.id === product?.id);
   const { price, discount } = product;
-  
+
   const handleAddToBag = () => {
-    if(!selectedSize) return
-    
-    onClose?.()
-    onConfirm?.()
-  }
+    if (!selectedSize) return;
+
+    onClose?.();
+    onConfirm?.();
+  };
 
   return (
     <AnimatePresence>
@@ -23,7 +28,7 @@ const SizeSelectionModal = ({ open, onClose, onConfirm, selectedSize, sizes, pro
               {/* Header */}
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-[16px] font-medium">Select Size</h2>
-                <button onClick={onClose} >
+                <button onClick={onClose}>
                   <CloseIcon className="text-primary-200 text-[18px]" />
                 </button>
               </div>
@@ -59,12 +64,16 @@ const SizeSelectionModal = ({ open, onClose, onConfirm, selectedSize, sizes, pro
 
               {/* Delivery Info */}
               <div className="text-[12px] text-secondary-100 mb-1 font-albert">Delivery by Sat, 21 Dec - 110020</div>
-              <div className="text-[12px] text-secondary-100 mb-6 font-albert">Seller: <b>LOREM TEXTILES PVT LTD</b></div>
+              <div className="text-[12px] text-secondary-100 mb-6 font-albert">
+                Seller: <b>LOREM TEXTILES PVT LTD</b>
+              </div>
 
-              <button onClick={handleAddToBag} className="w-full py-3 bg-primary-100 text-primary-500 rounded-lg flex items-center justify-center gap-2 ripple">
-                <img src={BagColoredIcon} />
-                Add To Bag
-              </button>
+              <Link to={isExistInCart ? "/cart" : undefined}>
+                <button onClick={handleAddToBag} className="w-full py-3 bg-primary-100 text-primary-500 rounded-lg flex items-center justify-center gap-2 ripple">
+                  <img src={BagColoredIcon} />
+                  {isExistInCart ? "Go to Bag" : "Add To Bag"}
+                </button>
+              </Link>
             </div>
           </motion.div>
         </>
