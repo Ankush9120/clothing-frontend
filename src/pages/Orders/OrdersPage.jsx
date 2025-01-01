@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { MdChevronRight, MdStar, MdStarBorder } from "react-icons/md";
 import Header from "../../components/Header";
 import SearchBar from "../../components/SearchBar";
-import { formatPrice, getOrderStatusIcon } from "../../utils/utils";
 import OrderItem from "./components/OrderItem";
 
 

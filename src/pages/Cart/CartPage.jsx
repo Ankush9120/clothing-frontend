@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { FiShoppingBag, FiTruck, FiShield, FiSettings } from "react-icons/fi";
 import Header from "../../components/Header";
-import { HeartIcon } from "../../libs/icons";
+import { HeartIcon, QualityIcon, SecureIcon, TruckIcon } from "../../libs/icons";
 import StickyButton from "../../components/StickyButton";
 import StatusBar from "../../components/StatusBar";
 import AddressSection from "./components/AddressSection";
@@ -171,19 +171,19 @@ const CartPage = () => {
       <div className="flex justify-around p-4">
         <div className="flex flex-col items-center text-center max-w-[100px]">
           <div className="bg-primary-300 p-3 rounded-full">
-            <FiShield size={24} />
+            <img src={SecureIcon} alt="secure" />
           </div>
           <p className="text-xs mt-2">100% SECURE PAYMENT</p>
         </div>
         <div className="flex flex-col items-center text-center max-w-[100px]">
           <div className="bg-primary-300 p-3 rounded-full">
-            <FiTruck size={24} />
+            <img src={TruckIcon} alt="secure" />
           </div>
           <p className="text-xs mt-2">EASY RETURNS & INSTANT REFUNDS</p>
         </div>
         <div className="flex flex-col items-center text-center max-w-[100px]">
           <div className="bg-primary-300 p-3 rounded-full">
-            <FiSettings size={24} />
+            <img src={QualityIcon} alt="secure" />
           </div>
           <p className="text-xs mt-2">QUALITY ASSURANCE</p>
         </div>

@@ -9,10 +9,7 @@ import { IconType } from "../../../libs/types";
 const HeartIcon = "/assets/icons/heart.svg";
 const ShareIcon = "/assets/icons/share.svg";
 
-const ProductHeader = ({ productId }) => {
-  const navigate = useNavigate();
-  const cartItems = useSelector(state => state.cart.items);
-  const cartCount = cartItems.length;
+const ProductHeader = () => {
   
   const handleShare = () => {
     if (navigator.share) {
@@ -41,7 +38,7 @@ const ProductHeader = ({ productId }) => {
           <Icon icon={HeartIcon} variant={IconType.FILLED} />
         </Link>
         <Link to="/cart" className="relative">
-          <CartIcon count={cartCount} />
+          <CartIcon />
         </Link>
       </div>
     </div>

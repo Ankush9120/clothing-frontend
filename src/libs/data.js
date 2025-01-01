@@ -1,7 +1,7 @@
 export const productData = [
   {
     id: 11,
-    title: "Alata",
+    name: "Alata",
     price: 2513,
     originalPrice: 3513,
     description: "Women cotton printed long dress gown",
@@ -43,7 +43,7 @@ export const productData = [
   },
   {
     id: 12,
-    title: "Alata",
+    name: "Alata",
     price: 1513,
     originalPrice: 2513,
     description: "Women cotton printed long dress gown",
@@ -84,7 +84,7 @@ export const productData = [
   },
   {
     id: 13,
-    title: "Alata",
+    name: "Alata",
     price: 2513,
     originalPrice: 3513,
     description: "Women cotton printed long dress gown",
@@ -125,7 +125,7 @@ export const productData = [
   },
   {
     id: 14,
-    title: "Alata",
+    name: "Alata",
     price: 6513,
     originalPrice: 7513,
     description: "Women cotton printed long dress gown",
@@ -167,7 +167,7 @@ export const productData = [
   },
   {
     id: 15,
-    title: "Alata",
+    name: "Alata",
     price: 3513,
     originalPrice: 4513,
     description: "Women cotton printed long dress gown",
@@ -208,7 +208,7 @@ export const productData = [
   },
   {
     id: 16,
-    title: "Alata",
+    name: "Alata",
     price: 8513,
     originalPrice: 9513,
     description: "Women cotton printed long dress gown",
@@ -249,7 +249,7 @@ export const productData = [
   },
   {
     id: 17,
-    title: "Alata",
+    name: "Alata",
     price: 1513,
     originalPrice: 2213,
     description: "Women cotton printed long dress gown",
@@ -290,7 +290,7 @@ export const productData = [
   },
   {
     id: 18,
-    title: "Alata",
+    name: "Alata",
     price: 9513,
     originalPrice: 10513,
     description: "Women cotton printed long dress gown",
@@ -334,7 +334,7 @@ export const productData = [
 export const similar_products = [
   {
     id: "s1",
-    title: "Alata",
+    name: "Alata",
     price: 2513,
     originalPrice: 3513,
     description: "Women cotton printed long dress gown",
@@ -374,7 +374,7 @@ export const similar_products = [
   },
   {
     id: "s2",
-    title: "Alata",
+    name: "Alata",
     price: 1513,
     originalPrice: 2213,
     description: "Women cotton printed long dress gown",
@@ -414,7 +414,7 @@ export const similar_products = [
   },
   {
     id: "s3",
-    title: "Alata",
+    name: "Alata",
     price: 2513,
     originalPrice: 3513,
     description: "Women cotton printed long dress gown",
@@ -455,7 +455,7 @@ export const similar_products = [
   },
   {
     id: "s4",
-    title: "Alata",
+    name: "Alata",
     price: 6513,
     originalPrice: 7513,
     description: "Women cotton printed long dress gown",
@@ -497,7 +497,7 @@ export const similar_products = [
   },
   {
     id: "s5",
-    title: "Alata",
+    name: "Alata",
     price: 3513,
     originalPrice: 4513,
     description: "Women cotton printed long dress gown",
@@ -538,7 +538,7 @@ export const similar_products = [
   },
   {
     id: "s6",
-    title: "Alata",
+    name: "Alata",
     price: 8513,
     originalPrice: 9513,
     description: "Women cotton printed long dress gown",
@@ -579,7 +579,7 @@ export const similar_products = [
   },
   {
     id: "s7",
-    title: "Alata",
+    name: "Alata",
     price: 1513,
     originalPrice: 2213,
     description: "Women cotton printed long dress gown",
@@ -620,7 +620,7 @@ export const similar_products = [
   },
   {
     id: "s8",
-    title: "Alata",
+    name: "Alata",
     price: 9513,
     originalPrice: 10513,
     description: "Women cotton printed long dress gown",
@@ -661,7 +661,7 @@ export const similar_products = [
   },
   {
     id: "s9",
-    title: "Alata",
+    name: "Alata",
     price: 9513,
     originalPrice: 10513,
     description: "Women cotton printed long dress gown",
@@ -701,7 +701,7 @@ export const similar_products = [
   },
   {
     id: "s10",
-    title: "Alata",
+    name: "Alata",
     price: 9513,
     originalPrice: 10513,
     description: "Women cotton printed long dress gown",
@@ -741,7 +741,7 @@ export const similar_products = [
   },
   {
     id: "s11",
-    title: "Alata",
+    name: "Alata",
     price: 9513,
     originalPrice: 10513,
     description: "Women cotton printed long dress gown",
@@ -781,7 +781,7 @@ export const similar_products = [
   },
   {
     id: "s12",
-    title: "Alata",
+    name: "Alata",
     price: 9513,
     originalPrice: 10513,
     description: "Women cotton printed long dress gown",
@@ -824,7 +824,7 @@ export const similar_products = [
 export const trendingProducts = [
   {
     id: 21,
-    title: "Classic Denim Jacket",
+    name: "Classic Denim Jacket",
     price: 2513,
     originalPrice: 3513,
     description: "Men's stylish denim jacket for casual wear",
@@ -865,7 +865,7 @@ export const trendingProducts = [
   },
   {
     id: 22,
-    title: "Slim Fit Chino Pants",
+    name: "Slim Fit Chino Pants",
     price: 1213,
     originalPrice: 1513,
     description: "Men's comfortable slim fit chino pants",
@@ -906,7 +906,7 @@ export const trendingProducts = [
   },
   {
     id: 23,
-    title: "Premium Wool Blazer",
+    name: "Premium Wool Blazer",
     price: 5113,
     originalPrice: 6113,
     description: "Men's premium wool blazer for formal occasions",
@@ -947,7 +947,7 @@ export const trendingProducts = [
   },
   {
     id: 24,
-    title: "Casual Linen Shirt",
+    name: "Casual Linen Shirt",
     price: 4513,
     originalPrice: 5213,
     description: "Men's breathable linen shirt for summer",
@@ -988,7 +988,7 @@ export const trendingProducts = [
   },
   {
     id: 25,
-    title: "Elegant Pearl Necklace",
+    name: "Elegant Pearl Necklace",
     price: 1513,
     originalPrice: 2213,
     description: "Women's elegant freshwater pearl necklace",
@@ -1028,7 +1028,7 @@ export const trendingProducts = [
   },
   {
     id: 26,
-    title: "Diamond Stud Earrings",
+    name: "Diamond Stud Earrings",
     price: 4513,
     originalPrice: 5213,
     description: "Classic diamond stud earrings in 14K gold",

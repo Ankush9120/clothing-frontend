@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { setActiveFilter } from "../../../store/slices/productSlice";
 
 const FlashSale = () => {
-  const [activeFilter, setActiveFilter] = useState("Newest");
-  const filters = ["All", "Newest", "Popular", "Men", "Women", "Kids", "Sale", "Trending", "Accessories", "Shoes", "Electronics", "Sportswear"];
+  const { filters, activeFilter } = useSelector(state => state.products.flashSale);
+  const dispatch = useDispatch();
 
   const handleFilterClick = (filter) => {
-    setActiveFilter(filter);
+    dispatch(setActiveFilter(filter));
   };
 
   return (
@@ -23,3 +25,4 @@ const FlashSale = () => {
 };
 
 export default FlashSale;
+

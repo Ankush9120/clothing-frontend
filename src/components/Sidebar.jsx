@@ -1,7 +1,7 @@
-import { motion, AnimatePresence, useAnimation } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
-import { FaUser, FaTshirt, FaChild, FaGem, FaMitten, FaRing, FaShoppingBag, FaHeart, FaQuestionCircle, FaComments } from "react-icons/fa";
+import { useEffect, useRef } from "react";
+import { FaTshirt, FaChild, FaGem, FaMitten, FaRing, FaShoppingBag, FaHeart, FaQuestionCircle, FaComments } from "react-icons/fa";
 import { setSidebar } from "../store/slices/sidebarSlice";
 import SwipeIndicator from "./SwipeIndicator";
 import { Link, useLocation } from "react-router-dom";
@@ -94,7 +94,7 @@ const Sidebar = () => {
       heading: "MY ACCOUNT",
       items: [
         { icon: <FaShoppingBag />, label: "Orders", to: "/orders" },
-        { icon: <FaHeart />, label: "Wishlist" },
+        { icon: <FaHeart />, label: "Wishlist", to: "/liked-products" },
       ],
     },
     {

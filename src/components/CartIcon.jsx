@@ -1,21 +1,26 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Icon from "./Icon";
 import { IconType } from "../libs/types";
 import { motion, useAnimation } from "framer-motion";
+import { useSelector } from "react-redux";
 
 const BagIcon = "/assets/icons/bag.svg";
 
-const CartIcon = ({ count = 0 }) => {
+const CartIcon = () => {
+  const cartItems = useSelector(state => state.cart.items);
+  const count = cartItems?.length || 0;
   const controls = useAnimation();
+  const prevCountRef = useRef(count);
 
-  React.useEffect(() => {
-    if (count > 0) {
+  useEffect(() => {
+    if (count > prevCountRef.current) {
       controls.start({
         scale: [1, 1.2, 0.9, 1.1, 1],
         rotate: [0, -10, 10, -5, 5, 0],
         transition: { duration: 0.6, ease: 'easeInOut' }
       });
     }
+    prevCountRef.current = count;
   }, [count, controls]);
 
   return (

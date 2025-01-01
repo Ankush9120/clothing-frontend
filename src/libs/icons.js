@@ -24,6 +24,10 @@ export const CancelledColoredIcon = "/assets/icons/cancelled-colored.svg";
 
 export const CashIcon = "/assets/icons/cash.svg";
 
+export const TruckIcon = "/assets/icons/truck.svg";
+export const SecureIcon = "/assets/icons/secure.svg";
+export const QualityIcon = "/assets/icons/quality.svg";
+
 export { IoHeartOutline as HeartIcon } from "react-icons/io5";
 
 export { IoMdStar as StarIcon } from "react-icons/io";

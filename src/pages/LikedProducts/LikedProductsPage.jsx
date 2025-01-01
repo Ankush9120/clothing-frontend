@@ -14,7 +14,7 @@ const LikedProductsPage = () => {
         {likedProducts.length === 0 ? (
           <>
             <p>You haven&apos;t liked any products yet.</p>
-            <Link to="/" className="mt-4 inline-block text-blue-500">
+            <Link to="/" className="mt-4 inline-block bg-primary-100 border border-primary-100 rounded-md px-4 py-2 text-white">
               Continue Shopping
             </Link>
           </>
