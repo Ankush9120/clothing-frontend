@@ -28,6 +28,8 @@ export const TruckIcon = "/assets/icons/truck.svg";
 export const SecureIcon = "/assets/icons/secure.svg";
 export const QualityIcon = "/assets/icons/quality.svg";
 
+export const BuyIcon = "/assets/icons/buy.svg";
+
 export { IoHeartOutline as HeartIcon } from "react-icons/io5";
 
 export { IoMdStar as StarIcon } from "react-icons/io";
